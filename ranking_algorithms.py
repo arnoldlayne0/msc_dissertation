@@ -1,3 +1,6 @@
+import os
+os.chdir('C:/Users/ELITEBOOK840/Desktop/diss/code_public')
+
 from ortools.linear_solver import pywraplp
 
 import numpy as np
@@ -336,18 +339,33 @@ def rank_list_from_mat(rank_mat):
                 rank_list[j] = i
     return rank_list
 
+def two_group_mat(mat, prop_list, m, n):
+    mat_two = mat.copy()
+    for i in range(m):
+        for j in range(n):
+            if mat[i][j] == 1 and i in prop_list:
+                mat_two[i][j] = 0.5
+                
+    return mat_two
+
+def two_group_mat_two(mat, prop_list, m ,n):
+    mat_two = mat.copy()
+    for i in prop_list:
+        mat_two[i] = mat[i] / 2
+    return mat_two
+
 ### unfairness measures
-def max_unfair(rank_list, pos_imp, parity, prop_list):
+def max_unfair(rank_list, pos_imp, parity, prop_list, viol):
     '''returns the largest factor of violation of fairness constraints
     in a given ranking '''
     p = len(prop_list)
     group_exp = np.zeros(p)
     total_exp = sum(pos_imp)        
-    for i in rank_list:
+    for i in range(len(rank_list)):
         for l in range(p):
             if rank_list[i] in prop_list[l]:
                 group_exp[l] += pos_imp[i]/total_exp
-    unfair = max(group_exp / (parity + np.linspace(.001,.001,p)))
+    unfair = max(group_exp / (parity/viol + np.linspace(.001,.001,p)))
     
     return unfair
 

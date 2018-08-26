@@ -1,3 +1,5 @@
+import os
+os.chdir('C:/Users/ELITEBOOK840/Desktop/diss/code_public')
 ### this script analyses the real data from yow newsfeed study as provided in the yow_userstudy_raw.xls
 
 import numpy as np
@@ -7,6 +9,8 @@ import data_gen as dg
 import ranking_algorithms as ra
 import matplotlib.pyplot as plt
 from mpl_toolkits import axes_grid1
+#import importlib
+#importlib.reload(ra)
 
 # this is function makes better colourbars
 def add_colorbar(im, aspect=20, pad_fraction=0.5, **kwargs):
@@ -29,7 +33,7 @@ for j in range(n):
 
 ##### topic data - disjoint properties #####
 topic = 'entertainment'
-topic_df = dg.topic_data(dat_raw,topic,10)
+topic_df = dg.topic_data(topic,10)
 #topic_df = topic_df.reset_index(drop=True)
 item_qual_topic = topic_df.iloc[:,0]
 properties_topic = topic_df.iloc[:,1:]
