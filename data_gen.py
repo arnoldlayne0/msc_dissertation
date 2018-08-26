@@ -1,3 +1,6 @@
+import os
+os.chdir('C:/Users/ELITEBOOK840/Desktop/diss/code_public')
+
 ###### GENERATING DATA #####
 
 # this script contains a set of functions to generate and manipulate data
@@ -39,6 +42,7 @@ def sim_data(m, n, p, distinct):
         properties = gen_properties(m,p)
 
     return pos_imp, item_qual, properties
+
 
 
 def get_prop_list_sim(properties):
